@@ -34,7 +34,7 @@ namespace BackendLab01.Pages
             QuizId = quizId;
             ItemId = itemId;
             var quiz = _userService.FindQuizById(quizId);
-            var quizItem = quiz?.Items[itemId - 1];
+            var quizItem = quiz?.Items.Find(item => item.Id == itemId);
             Question = quizItem?.Question;
             Answers = new List<string>();
             if (quizItem is not null)
@@ -47,7 +47,13 @@ namespace BackendLab01.Pages
         public IActionResult OnPost()
         {
             var quiz = _userService.FindQuizById(QuizId);
-            if (quiz.Items.Count() == ItemId) return RedirectToPage("Summary");
+            var quizItem = quiz.Items.Find(item => item.Id == ItemId);
+            var quizItemIndex = quiz.Items.FindIndex(item => item.Id == ItemId);
+            
+            _userService.SaveUserAnswerForQuiz(QuizId, 1, quizItem.Id, UserAnswer);
+            
+            if (quiz.Items.Count() == quizItemIndex + 1)
+                return RedirectToPage("Summary", new { quizId = QuizId });
             return RedirectToPage("Item", new {quizId = QuizId, itemId = ItemId + 1});
         }
     }

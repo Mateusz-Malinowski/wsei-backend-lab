@@ -1,8 +1,10 @@
-﻿@page ""
+﻿@page "{quizId}"
 @model BackendLab01.Pages.Summary
 @{
-    ViewData["Title"] = "summary";
+    ViewData["Title"] = "Summary";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
 <H3>@ViewData["Title"]</H3>
+
+<p>Your score is @Model.PercentageScore% (@Model.NumberOfCorrectAnswers/@Model.Quiz.Items.Count())</p>

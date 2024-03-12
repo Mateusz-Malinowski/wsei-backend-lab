@@ -24,9 +24,9 @@ public static class SeedData
                 new QuizItem(4, "W którym roku wybuchła I Wojna Światowa?", new List<string>() { "1910", "1939", "1918" },
                     "1914"),
                 new QuizItem(5, "W którym roku wybuchła II Wojna Światowa?", new List<string>() { "1945", "1918", "1914" }, "1939"),
-                new QuizItem(6, "Kto był pierwszym prezydentem III RP?", new List<string>() { "Andrzej Duda", "Bronisław Komorowski", "Lech Wałęsa" }, "Aleksander Kwaśniewski"),
+                new QuizItem(6, "Kto był pierwszym prezydentem III RP?", new List<string>() { "Andrzej Duda", "Wojciech Jaruzelski", "Lech Wałęsa" }, "Wojciech Jaruzelski"),
             };
-            var quiz2 = new Quiz(2, quizItems1, "Historia");
+            var quiz2 = new Quiz(2, quizItems2, "Historia");
             
             quizRepo.Add(quiz1);
             quizRepo.Add(quiz2);
