@@ -39,11 +39,11 @@ public class QuizController : Controller
     }
 
     [Route("{id}/results")]
-    public ActionResult<QuizResultsDto> GetResults(int quizId)
+    public ActionResult<QuizResultsDto> GetResults(int id)
     {
-        var quiz = _service.FindQuizById(quizId);
+        var quiz = _service.FindQuizById(id);
         if (quiz is null) return NotFound();
-        var numberOfCorrectAnswers = _service.CountCorrectAnswersForQuizFilledByUser(quizId, 1);
+        var numberOfCorrectAnswers = _service.CountCorrectAnswersForQuizFilledByUser(id, 1);
         var numberOfQuestions = quiz.Items.Count();
 
         return Ok(new QuizResultsDto()
