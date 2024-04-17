@@ -37,4 +37,16 @@ public class QuizController : Controller
     {
         _service.SaveUserAnswerForQuiz(quizId, 1, itemId, dto.Answer);
     }
+
+    [Route("{id}/results")]
+    public ActionResult<QuizResultsDto> GetResults(int quizId)
+    {
+        var quiz = _service.FindQuizById(quizId);
+        if (quiz is null) return NotFound();
+        var numberOfCorrectAnswers = _service.CountCorrectAnswersForQuizFilledByUser(quizId, 1);
+        var numberOfQuestions = quiz.Items.Count();
+
+        return Ok(new QuizResultsDto()
+            { NumberOfQuestions = numberOfQuestions, NumberOfCorrectAnswers = numberOfCorrectAnswers });
+    }
 }
